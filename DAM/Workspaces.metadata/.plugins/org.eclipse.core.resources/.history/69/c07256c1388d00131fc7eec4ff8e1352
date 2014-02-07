@@ -1,0 +1,126 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class Examen extends JFrame {
+private float totalGastadoMesa[] = new float[10];
+private int totalComensales[] = new int[10];
+private int mesas =0;
+//private Examen miExamen = new Examen();
+private int comensalesAhora = 0;
+private float totalGastadoAhora = 0f;
+
+
+	private JPanel contentPane;
+	private JTextField numComensales;
+	private JTextField totalGastado;
+	private JTextField textField;
+	private JLabel lblTotalIngresos;
+	private JLabel lblTotalGastado;
+
+	/**
+	 * Create the frame.
+	 */
+	public Examen() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 432, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNumeroComensales = new JLabel("Numero comensales");
+		lblNumeroComensales.setBounds(10, 25, 95, 14);
+		contentPane.add(lblNumeroComensales);
+		
+		numComensales = new JTextField();
+		numComensales.setBounds(129, 22, 86, 20);
+		contentPane.add(numComensales);
+		numComensales.setColumns(10);
+		
+		lblTotalGastado = new JLabel("Total gastado");
+		lblTotalGastado.setBounds(10, 59, 95, 14);
+		contentPane.add(lblTotalGastado);
+		
+		totalGastado = new JTextField();
+		totalGastado.setBounds(129, 56, 86, 20);
+		contentPane.add(totalGastado);
+		totalGastado.setColumns(10);
+		
+		JLabel lblTotalPersonas = new JLabel("Total personas");
+		lblTotalPersonas.setBounds(10, 110, 95, 14);
+		contentPane.add(lblTotalPersonas);
+		
+		lblTotalIngresos = new JLabel("Total ingresos");
+		lblTotalIngresos.setBounds(10, 146, 95, 14);
+		contentPane.add(lblTotalIngresos);
+		
+		JLabel labelPersonas = new JLabel("0");
+		labelPersonas.setBounds(220, 110, 46, 14);
+		contentPane.add(labelPersonas);
+		
+		JLabel labelIngresos = new JLabel("0");
+		labelIngresos.setBounds(220, 146, 46, 14);
+		contentPane.add(labelIngresos);
+		
+		JButton btnNewButton_1 = new JButton("calcular ticket medio");
+		btnNewButton_1.setBounds(10, 190, 403, 23);
+		contentPane.add(btnNewButton_1);
+		
+		textField = new JTextField();
+		textField.setBounds(10, 224, 403, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Guardar ticket mesa");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+					if(mesas<=10){
+						totalGastadoMesa[mesas] = Float.valueOf(totalGastado.getText());
+						totalComensales[mesas] = Integer.valueOf(numComensales.getText());
+						
+						comensalesAhora = comensalesAhora + Integer.valueOf(numComensales.getText());
+						lblTotalIngresos.setText(Integer.toString(comensalesAhora));
+						
+						totalGastadoAhora = totalGastadoAhora + Float.valueOf(totalGastado.getText());
+						lblTotalGastado.setText(Float.toString(totalGastadoAhora));
+						
+//						System.out.println(comensales+" "+mesas);
+						mesas++;
+						
+						
+					}else if(mesas>10){
+						
+					}
+					
+				}catch (Exception e){
+					System.out.println("ha habido un error");
+				}
+			}
+		});
+		btnNewButton.setBounds(260, 21, 153, 54);
+		contentPane.add(btnNewButton);
+		
+
+	}
+	
+	private int[] devolverComensales (){
+		return totalComensales;
+	}
+	private float[] devolverGastado(){
+		return totalGastadoMesa;
+	}
+	private void resetear(){
+		
+	}
+}
